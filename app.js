@@ -1,12 +1,20 @@
 const { expressApp, PORT } = require('./config/setup');
 const { dbConnect } = require('./config/dbConnect');
-const router = require('./router/authRoute');
+const {userRouter} = require('./router/authRoute');
+const {router: productRouter} = require('./router/productRoute');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 const cookieParser = require('cookie-parser');
+const morgan = require("morgan");
+
 
 dbConnect();
 
-expressApp.use('/api/user', router)
+// request logging
+expressApp.use(morgan("combined"));
+
+// routers
+expressApp.use('/api/user', userRouter)
+expressApp.use('/api/product', productRouter);
 
 expressApp.use(notFound);
 expressApp.use(errorHandler);

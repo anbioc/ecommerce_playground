@@ -8,20 +8,20 @@ const {
      
 const { authMiddleware, isAdmin } = require('../middleware/authMiddleware');
 
-const router = require('express').Router()
+const userRouter = require('express').Router()
 
 
 
-router.post('/register', createUser);
-router.post('/login', loginUser);
-router.put('/logout', logout);
-router.get('/user', authMiddleware, getUser);
-router.get('/users', authMiddleware, isAdmin, getUsers);
-router.delete('/users', authMiddleware, isAdmin, deleteUsers);
-router.delete('/user/:email', authMiddleware, isAdmin, deleteUser);
-router.put('/user', authMiddleware, updateUser)
-router.put('/blockUser/:id/', authMiddleware, isAdmin, blockUser)
-router.put('/unblockuser/:id/', authMiddleware, isAdmin, unblockUser)
-router.get('/refresh' , handleRefreshToken)
+userRouter.post('/register', createUser);
+userRouter.post('/login', loginUser);
+userRouter.put('/logout', logout);
+userRouter.get('/user', authMiddleware, getUser);
+userRouter.get('/users', authMiddleware, isAdmin, getUsers);
+userRouter.delete('/users', authMiddleware, isAdmin, deleteUsers);
+userRouter.delete('/user/:email', authMiddleware, isAdmin, deleteUser);
+userRouter.put('/user', authMiddleware, updateUser)
+userRouter.put('/blockUser/:id/', authMiddleware, isAdmin, blockUser)
+userRouter.put('/unblockuser/:id/', authMiddleware, isAdmin, unblockUser)
+userRouter.get('/refresh' , handleRefreshToken)
 
-module.exports = router;
+module.exports = {userRouter};

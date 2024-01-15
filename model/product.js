@@ -1,28 +1,75 @@
-const mongoose = require('mongoose'); // Erase if already required
+const mongoose = require('mongoose');
 
 // Declare the Schema of the Mongo model
-var ProductSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        unique:true,
-        index:true,
+var productSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    price:{
-        type:Float32Array,
-        required:true,
-        unique:true,
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
     },
-    mobile:{
-        type:String,
-        required:true,
-        unique:true,
+    description: {
+      type: String,
+      required: true,
     },
-    password:{
-        type:String,
-        required:true,
+    price: {
+      type: Number,
+      required: true,
     },
-});
+    category: {
+      type: String,
+      required: true,
+    },
+    // category: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true,
+    // },
+    brand: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      select: false
+    },
+    sold: {
+      type: Number,
+      default: 0,
+      select:false
+    },
+    images: [
+      {
+        public_id: String,
+        url: String,
+      },
+    ],
+    color: [{
+      type:String,
+      required: true,
+      // enum:["Red", "White", "black"]
+    }],
+    tags: String,
+    ratings: [
+      {
+        star: Number,
+        comment: String,
+        postedby: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      },
+    ],
+    totalrating: {
+      type: String,
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
 
 //Export the model
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model("Product", productSchema);

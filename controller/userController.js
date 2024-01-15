@@ -1,4 +1,3 @@
-const { response } = require('express');
 const User = require('../model/user');
 const asyncHandler = require('express-async-handler');
 const {validateMongoDbID: idValidator} = require("../util/validateMongoDbID");
